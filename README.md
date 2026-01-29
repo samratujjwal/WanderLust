@@ -66,6 +66,9 @@ Ensure you have the following installed:
    ```bash
    git clone https://github.com/samratujjwal/WanderLust.git
    cd WanderLust
+## 📁 Project Structure
+
+```
 WanderLust/
 ├── public/              # Static assets (CSS, JS, images)
 ├── routes/              # Express routes
@@ -77,6 +80,8 @@ WanderLust/
 ├── app.js               # App configuration
 ├── package.json
 └── README.md
+```
+
 
 👤 Author
 
