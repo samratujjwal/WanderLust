@@ -1,5 +1,5 @@
 <% layout("./layouts/boilerplate") %>
-<div id="mainContent">
+    <div id="mainContent">
         <div id="filters">
             <a class="filter col " href="/listings/category/Budget">
                 <div><i class="fa-solid fa-fire"></i></div>
@@ -43,60 +43,69 @@
         </div>
 
         <div class="listings-wrapper container">
-            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 justify-content-center">
-                <% for(list of allListing){ %>
-                    <a href="/listings/<%=list._id%>" class="listing-link ">
-                        <div class="card h-100 w-100">
-                            <img data-src="<%= list.image.url %>" class="card-img-top lazy-img img-fluid"
-                                alt="Listing_images">
-                            <div class="card-img-overlay">Click here</div>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%= list.title %>
-                                </h5>
-                                <p class="card-text">
-                                    ₹<%= list.price.toLocaleString("en-IN") %>/night
-                                        <i class="tax-info">&nbsp;&nbsp;+18% GST</i>
-                                </p>
-                                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+
+            <% if (searchQuery) { %>
+                <h4 class="mb-3 text-center">
+                    Search results for "<%= searchQuery %>"
+                </h4>
+                <% } %>
+
+                    <% if (allListing.length===0) { %>
+                        <p class="text-center mt-4">
+                            No listings found matching your search.
+                        </p>
+                        <% } %>
+
+                            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 justify-content-center">
+                                <% for (let list of allListing) { %>
+                                    <a href="/listings/<%= list._id %>" class="listing-link">
+                                        <div class="card h-100 w-100">
+                                            <img data-src="<%= list.image.url %>"
+                                                class="card-img-top lazy-img img-fluid" alt="Listing_images">
+                                            <div class="card-img-overlay">Click here</div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= list.title %>
+                                                </h5>
+                                                <p class="card-text">
+                                                    ₹<%= list.price.toLocaleString("en-IN") %>/night
+                                                        <i class="tax-info">&nbsp;&nbsp;+18% GST</i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <% } %>
                             </div>
-                        </div>
-                    </a>
-                    <% } %>
-            </div>
         </div>
-</div>
- <div id="searchOverlay">
-        <button id="closeSearch" class="closeSearch btn" type="button">
-            <strong>Close</strong>
-        </button>
- </div>
-<script>
-    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-    taxSwitch.addEventListener("click", () => {
-        let taxInfo = document.getElementsByClassName("tax-info");
-        for (info of taxInfo) {
-            if (info.style.display != "inline") {
-                info.style.display = "inline";
-            } else {
-                info.style.display = "none";
-            }
-        }
-    });
-    document.addEventListener("DOMContentLoaded", () => {
-        const lazyImages = document.querySelectorAll(".lazy-img");
 
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.add("loaded");
-                    obs.unobserve(img);
+    </div>
+
+    <script>
+        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click", () => {
+            let taxInfo = document.getElementsByClassName("tax-info");
+            for (info of taxInfo) {
+                if (info.style.display != "inline") {
+                    info.style.display = "inline";
+                } else {
+                    info.style.display = "none";
                 }
-            });
+            }
         });
+        document.addEventListener("DOMContentLoaded", () => {
+            const lazyImages = document.querySelectorAll(".lazy-img");
 
-        lazyImages.forEach(img => observer.observe(img));
-    });
-</script>
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add("loaded");
+                        obs.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => observer.observe(img));
+        });
+    </script>

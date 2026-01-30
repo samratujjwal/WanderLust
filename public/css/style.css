@@ -302,32 +302,7 @@ body {
     opacity: 1;
 }
 
-#searchOverlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(5px);
-  background-color: rgba(252, 191, 191, 0.6); 
-  z-index:1500; 
-  padding: 2rem;
-  overflow-y: auto;
-}
-#closeSearch {
-  position: absolute;
-  top: 6rem;
-  right:1.5rem;
-  background-color: #fe424d;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10000;
-}
+
 .blur {
     filter: blur(10px);
     pointer-events: none;

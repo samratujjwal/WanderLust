@@ -3,12 +3,20 @@
         background-color: #fe424d;
         color: white;
         border-radius: 20px;
-        padding: 0 1rem 0 1rem;
+        padding: 0 2rem 1rem 1rem;
+        display: flex;
+        align-items: center;
+        align-content: center;
     }
 
     .btn-search i {
-        display: inline;
-        margin-right: 0.5rem;
+        display: inline-block;
+        margin-right: 1rem;
+    }
+
+    .search-form {
+        display: flex;
+        align-items: center;
     }
 </style>
 
@@ -24,10 +32,16 @@
                 <a class="nav-link" href="/listings">Explore</a>
             </div>
             <div class="navbar-nav ms-auto">
-                <form class=" d-flex">
-                    <input id="searchTrigger" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <!-- <form method="post" action="" class=" d-flex">
+                    <input id="searchTrigger" class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
                     <button id="searchTrigger"  class="btn btn-search btn-search" type="submit"><i class="fas fa-search"></i>Search</button>
+                </form> -->
+                <form action="/listings/search" method="GET" class="search-form">
+                    <input class="form-control me-2" type="text" name="q" placeholder="Search by hotel or location"
+                        value="<%= searchQuery || '' %>" required />
+                    <button class="btn btn-search" type="submit"><i class="fas fa-search"></i>Search</button>
                 </form>
+
             </div>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/listings/new">Add New Listing</a>
@@ -42,4 +56,4 @@
         </div>
     </div>
 </nav>
- <script src="/js/script.js"></script>
+<script src="/js/script.js"></script>
